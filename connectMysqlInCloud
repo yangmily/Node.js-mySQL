@@ -1,0 +1,48 @@
+
+1. Login in Cloud Foundry 
+  cf login –sso 
+2. Get application name APP_NAME
+   cf apps 
+3. Get all the services
+   cf services 
+4. Get service key of the application 
+    cf service-keys SERVICE_INSTANCE_NAME
+    
+   (If no service key for service instance SERVICE_INSTANCE_NAME, then create one service key for APP_NAME)
+    cf create-service-key SERVICE_INSTANCE_NAME SERVICE_KEY_NAME
+    
+5.	Check the service key info: 
+    cf service-key SERVICE_INSTANCE_NAME SERVICE_KEY_NAME
+    
+    Getting key SERVICE_KEY_NAME for service instance SERVICE_INSTANCE_NAME as SPACE_NAME...
+    {
+     "db_name": "XXXXXXXXX",
+     "host": "XXXXXXXXXXX",
+     "password": "XXXXXXXXXXX",
+     "port": "3306",
+     "uri": "XXXXXXXXX:3306",
+     "username": "XXXXXXXXX"
+    }
+
+8.	Create ssh secure tunnel
+    cf ssh –L 63306: HOST_NAME:3306 APP_NAME
+
+9.	Open MySQL Workbench
+10.	Create connection for APP_NAME 
+      Connection name: APP_NAME
+      Connection method: Standard TCP/IP
+      Parameters: 
+      Hostname: 127.0.0.1
+      Port: 63306
+      Username: XXXXXXXXXX
+      Password: XXXXXXXXXXXX 
+      Click “Test Connection”, then successfully connected. 
+
+11.	After connect to mysql server, your can create tables.
+      Right click “tables”, create table 
+12.	Create models for each table. 
+    •	npm install mysql –save
+
+Reference: 
+•	How to Connect to MySQL Database from Node.Js, https://www.youtube.com/watch?v=XuLRKMqozwA
+•	Using mysql with node.js, https://www.youtube.com/watch?v=EN6Dx22cPRI
